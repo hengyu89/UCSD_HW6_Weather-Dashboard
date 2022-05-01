@@ -25,3 +25,5 @@ SO THAT I can plan a trip accordingly
 ## Screenshot:
 
 ![This is the Screenshot of the weather dashboard app](./assets/images/screenshot1.png)
+
+![This is the second Screenshot of the weather dashboard app](./assets/images/screenshot2.png)
