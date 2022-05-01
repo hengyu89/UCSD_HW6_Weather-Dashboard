@@ -1,0 +1,28 @@
+nav {
+    margin-bottom: 10px;
+}
+
+#search-title,
+h3 {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+#city-name {
+    width: 100%;
+    height: 40px;
+}
+
+#search-button {
+    width: 100%;
+}
+
+.search-history button {
+    margin: 5px 0;
+    width: 100%;
+}
+
+.display-today {
+    border: 1px solid;
+    font-weight: bold;
+}
