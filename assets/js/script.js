@@ -69,6 +69,7 @@ function weatherByLocation(latitude, longitude, cityName) {
 
 function displayToday(data, cityName) {
     todayInfo.innerHTML = "";
+    var warnColor = "";
     var todayDate = moment().format("l");
     var template = `
     <div class="row display-today">
@@ -76,8 +77,20 @@ function displayToday(data, cityName) {
     <p>Temp: ${data.temp.day} °F</p>
     <p>Wind: ${data.wind_speed} MPH</p>
     <p>Humidity: ${data.humidity} %</p>
-    <p>UV index: ${data.uvi}</p></div>`;
+    <p>UV index: <span id="uvindex">${data.uvi}</span></p></div>`;
     todayInfo.innerHTML = template;
+
+    if(data.uvi <= 2) {
+        document.querySelector('#uvindex').setAttribute('style', 'background-color: green');
+    } else if(data.uvi <= 5) {
+        document.querySelector('#uvindex').setAttribute('style', 'background-color: yellow');
+    } else if(data.uvi <= 7) {
+        document.querySelector('#uvindex').setAttribute('style', 'background-color: orange');
+    } else if(data.uvi <= 10) {
+        document.querySelector('#uvindex').setAttribute('style', 'background-color: red');
+    } else {
+        document.querySelector('#uvindex').setAttribute('style', 'background-color: purple');
+    }
 }
 
 function displayFuture(data) {
