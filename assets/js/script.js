@@ -72,7 +72,7 @@ function displayToday(data, cityName) {
     var todayDate = moment().format("l");
     var template = `
     <div class="row display-today">
-    <h3>${cityName} (${todayDate})</h3>
+    <h3>${cityName} (${todayDate}) <img src="http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png"/> </h3>
     <p>Temp: ${data.temp.day} °F</p>
     <p>Wind: ${data.wind_speed} MPH</p>
     <p>Humidity: ${data.humidity} %</p>
@@ -88,7 +88,8 @@ function displayFuture(data) {
     for (var i = 0; i < 5; i++) {
         var template = `
         <div class="col-2 bg-dark text-light">
-            <h4>${moment().add(i+1,'days').format('l')}</h4> <br>
+            <h4>${moment().add(i+1,'days').format('l')}</h4> 
+            <img src="http://openweathermap.org/img/wn/${data.daily[i+1].weather[0].icon}@2x.png"/><br>
             <p>Temp: ${data.daily[i+1].temp.day}°F</p>
             <p>Wind: ${data.daily[i+1].wind_speed} MPH</p>
             <p>Humidity: ${data.daily[i+1].humidity}%</p></div>
@@ -107,7 +108,10 @@ function storeObject(data, cityName) {
             },
             wind_speed: data.daily[i].wind_speed,
             humidity: data.daily[i].humidity,
-            uvi: data.daily[i].uvi
+            uvi: data.daily[i].uvi,
+            weather: [
+                {icon: data.daily[i].weather[0].icon}
+            ]
         }
     }
     historyLocation[cityName] = thisLocation;
@@ -129,5 +133,4 @@ function addListener(historyLocation) {
     }
 }
 
-console.log("js works.")
 searchBtn.addEventListener("click", displayWeatherInfo);
