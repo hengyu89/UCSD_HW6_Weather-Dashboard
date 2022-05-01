@@ -22,8 +22,6 @@ SO THAT I can plan a trip accordingly
 
 * The weather information includes: city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index 
 
-### Here the name of city requires a first capital letter(like "San Diego", NOT "san diego").
-
 ## Screenshot:
 
 ![This is the Screenshot of the weather dashboard app](./assets/images/screenshot1.png)

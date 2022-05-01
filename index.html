@@ -10,10 +10,9 @@
       type="text/javascript"
       src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"
     ></script>
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
-    
     <title>Weather Dashboard</title>
 </head>
+
 <body>
     <!-- Navigation bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -21,10 +20,13 @@
           <a class="navbar-brand" href="#">Weather Dashboard</a>
         </div>
     </nav>
+
+    <!-- display area -->
     <div class="container">
         <div class="row">
+            
             <!-- Sidebar -->
-            <div class="col-3 ">stuff for the city section
+            <div class="col-3 ">
                 <!-- search area -->
                 <form class="submit-form">
                     <label id="search-title">Search for a City:</label> <br>
@@ -35,21 +37,17 @@
                 <div class="row">
                     <!-- search history -->
                     <form class="search-history">
-                        <!-- <button type="submit" class="btn btn-primary" id="history1">San Diego</button> <br>
-                        <button type="submit" class="btn btn-primary" id="history2">Jiujiang</button> <br> -->
                     </form>
                 </div>
             </div>
+
             <!-- Display Area -->
-            <div class="col-9 display-area">stuff for the weather section
+            <div class="col-9 display-area">
                 <!-- current day -->
                 <!-- future 5 days -->
             </div>
         </div>
     </div>
-
-    
     <script type="text/javascript" src="./assets/js/script.js"></script>
-
 </body>
 </html>

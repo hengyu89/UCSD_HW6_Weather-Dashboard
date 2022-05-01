@@ -8,6 +8,8 @@ var searchTime = -1;
 
 var apiKey = "62eb0d1b2578798b78921afefd59670e";
 
+
+// active when click the "search" button
 function displayWeatherInfo(event) {
     event.preventDefault();
     searchTime ++;
@@ -22,6 +24,7 @@ function displayWeatherInfo(event) {
 };
 
 
+// input => city name, output => location(latitude, longitude)
 function weatherSearchData(wantCityName) {
     var longitude = 0;
     var latitude = 0;
@@ -45,6 +48,7 @@ function weatherSearchData(wantCityName) {
 };
 
 
+// input => location, display all weather information.
 function weatherByLocation(latitude, longitude, cityName) {
     var URLforInfo = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=imperial`;
     return fetch(URLforInfo).then(response => {
@@ -67,9 +71,11 @@ function weatherByLocation(latitude, longitude, cityName) {
 };
 
 
+// subfunction to display TODAY's weather.
 function displayToday(data, cityName) {
+
+    // display today's weather information
     todayInfo.innerHTML = "";
-    var warnColor = "";
     var todayDate = moment().format("l");
     var template = `
     <div class="row display-today">
@@ -80,6 +86,7 @@ function displayToday(data, cityName) {
     <p>UV index: <span id="uvindex">${data.uvi}</span></p></div>`;
     todayInfo.innerHTML = template;
 
+    // add different colors to UV index with TODAY.
     if(data.uvi <= 2) {
         document.querySelector('#uvindex').setAttribute('style', 'background-color: green');
     } else if(data.uvi <= 5) {
@@ -93,10 +100,16 @@ function displayToday(data, cityName) {
     }
 }
 
+
+// subfunction to display future 5 days weather.
 function displayFuture(data) {
+
+    // main layout of future 5 days title
     todayInfo.innerHTML += `
     <div class="row display-future justify-content-around">
         <h3>5-day forecast:</h3>`;
+
+    // capture the tag of main layout, and put 5 days weather information in there.
     var futureInfo = document.querySelector(".display-future");
     for (var i = 0; i < 5; i++) {
         var template = `
@@ -111,8 +124,11 @@ function displayFuture(data) {
     }
 }
 
+
+// store weather information, for history buttons use.
 function storeObject(data, cityName) {
-    // Create object for local storage
+
+    // store the information with same format as API, in order to work in display function.
     var thisLocation = {daily:[]}
     for (var i = 0; i < 6; i++) {
         thisLocation.daily[i] = {
@@ -128,22 +144,37 @@ function storeObject(data, cityName) {
         }
     }
     historyLocation[cityName] = thisLocation;
+
+    // add history buttons for searching.
     historyBtn.innerHTML += `
         <button type="submit" class="btn btn-primary history${searchTime}">${cityNameList[searchTime]}</button> <br>
         `;
-
+    // add listener function to each buttons.
     addListener(historyLocation);
 }
 
+
+// add eventListener function to each history buttons.
 function addListener(historyLocation) {
+    // use loop to apply listener function to all history buttons.
     for (var i = 0; i < cityNameList.length; i++) {
         document.querySelector('.history'+i).addEventListener("click", function(event) {
             event.preventDefault();
-            var name = event.target.innerHTML; // name of city
+            var name = capitalizeName(event.target.innerHTML); // name of city
             displayToday(historyLocation[name].daily[0], name);
             displayFuture(historyLocation[name]);
         })
     }
+}
+
+// capitalize the initial of city name. Example: "san diego" to "San Diego".
+function capitalizeName(name) {
+    var arr = name.split(' ');
+    for( var i = 0; i < arr.length; i++) {
+        arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
+    };
+    var capName = arr.join(" ");
+    return capName;
 }
 
 searchBtn.addEventListener("click", displayWeatherInfo);
